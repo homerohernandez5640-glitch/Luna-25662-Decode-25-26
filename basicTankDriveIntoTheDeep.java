@@ -1,3 +1,5 @@
+//This is just some practice for my programming in different situations.
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -10,6 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp(name = "basicTankDrive/IntoDeep")
 public class basicTankDriveIntoTheDeep extends OpMode{
 
+    //This is an example from Gobilda's IntoTheDeep robot 
     private DcMotor Right;
     private DcMotor Left;
 
@@ -38,7 +41,7 @@ public class basicTankDriveIntoTheDeep extends OpMode{
 
 
 
-      //Motors
+      //Motor variables
 double forward = 0.8*gamepad1.left_stick_y;
 double turn = 0.8*gamepad1.right_stick_x;
 double arm = 1*gamepad2.left_stick_y;
