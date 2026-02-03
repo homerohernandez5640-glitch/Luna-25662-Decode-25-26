@@ -1,0 +1,169 @@
+package org.firstinspires.ftc.teamcode;
+
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+
+@Autonomous
+public class blueClass extends LinearOpMode {
+
+
+   ElapsedTime timer = new ElapsedTime();
+   DcMotor lowerLeft;
+   DcMotor upperLeft;
+   DcMotor lowerRight;
+   DcMotor upperRight;
+   DcMotor Luna;
+   DcMotor intake;
+
+
+   Servo Jesus;
+
+
+   @Override
+   public void runOpMode() {
+       lowerLeft = hardwareMap.dcMotor.get("lowerLeft");
+       upperLeft = hardwareMap.dcMotor.get("upperLeft");
+       lowerRight = hardwareMap.dcMotor.get("lowerRight");
+       upperRight = hardwareMap.dcMotor.get("upperRight");
+       Luna = hardwareMap.dcMotor.get("Luna");
+       intake = hardwareMap.dcMotor.get("intake");
+       Jesus = hardwareMap.servo.get("Jesus");
+
+
+       upperLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+       lowerLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+
+
+       waitForStart();
+       drive(.8, 3200, 0, 0);
+       sleep(100);
+       drive(0.8, 0, 0, 450);
+       timer.reset();
+       while (opModeIsActive() && (timer.seconds() <= 4.5)){
+           manipulator(0.7,0);
+
+
+
+
+
+
+       }
+       timer.reset();
+       while (opModeIsActive() && (timer.seconds() <= 0.1)){
+           manipulator(0,-1);
+
+
+
+
+
+
+       }
+       timer.reset();
+       while (opModeIsActive() && (timer.seconds() <= 1.0)){
+           manipulator(0,0);
+
+
+
+
+
+
+       }
+       timer.reset();
+       while (opModeIsActive() && (timer.seconds() <= 2.0)){
+           manipulator(0.7,0);
+
+
+
+
+
+
+       }
+       timer.reset();
+       while (opModeIsActive() && (timer.seconds() <= 2.0)){
+           manipulator(0,-1);
+Jesus.setPosition(-1);
+
+
+
+
+       }
+
+
+      /* while(timer.seconds()<=1.0){
+           manipulator(0,-1);
+
+
+       }
+       timer.reset();
+       while ((timer.seconds()>= 0) && (timer.seconds()<=1)) {
+           drive(0.8, 300, 0, 0);
+       }
+       timer.reset();
+       while(opModeIsActive() && (timer.seconds() >= 0.5) && (timer.seconds() <= 4)){
+           manipulator(0,-1);
+       }
+       timer.reset();
+       while (opModeIsActive() && (timer.seconds() <= 2.0) && (timer.seconds() <= 1.5)){
+           manipulator(0,0);
+           manipulator(1,0);
+
+
+
+
+
+
+       }
+       manipulator(0,-1);*/
+       sleep(30000);
+
+
+   }
+
+
+   public void drive(double power, int forward, int strafe, int turn) {
+       lowerLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       upperLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       lowerRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       upperRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+       lowerRight.setTargetPosition(forward - strafe + turn);
+       upperRight.setTargetPosition(forward + strafe + turn);
+       lowerLeft.setTargetPosition(forward + strafe - turn);
+       upperLeft.setTargetPosition(forward - strafe - turn);
+
+
+       lowerLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+       upperLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+       lowerRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+       upperRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+       lowerLeft.setPower(power);
+       upperLeft.setPower(power);
+       lowerRight.setPower(power);
+       upperRight.setPower(power);
+
+
+       while (lowerLeft.isBusy() && upperLeft.isBusy() && upperRight.isBusy() && lowerRight.isBusy()) {
+       }
+       sleep(100);
+   }
+       public void manipulator(double lunapower,double intakePower) {
+           //Servo spinny1 should be negative and spinny 2 should be positive when intaking
+           intake.setPower(intakePower);
+           Luna.setPower(lunapower);
+       }
+   }
+
+
+
+
